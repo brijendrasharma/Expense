@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using ExpenserAPI.utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
@@ -8,10 +9,15 @@ namespace ExpenserAPI.Controllers
     [Route("api/[controller]")]
     public class CategoryController : ControllerBase
     {
+        private readonly IFileReader _fileReader;
+        public CategoryController() {
+            string filePath = Path.Combine(Directory.GetCurrentDirectory(), "MockData", "MockData.json");
+            _fileReader = new JsonReader(filePath);
+        }
         [HttpGet]
         public IActionResult GetCategories()
         {
-            string categories = "This is to return Categories";
+            var categories = _fileReader.getCategories();
             return Ok(categories);
         }
 
@@ -27,7 +33,12 @@ namespace ExpenserAPI.Controllers
         [HttpGet("{id}")]
         public IActionResult GetCategorybyId([FromRoute] int id)
         {
-            return Ok();
+            var category = _fileReader.getCategoryById(id);
+            if (category == null)
+            {
+                return NotFound($"Category with ID {id} not found.");
+            }
+            return Ok(category);
         }
     }
 }

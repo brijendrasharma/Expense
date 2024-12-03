@@ -30,4 +30,4 @@ namespace ExpenserAPI.Controllers
             .ToArray();
         }
     }
-}
+}   

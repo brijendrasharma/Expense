@@ -1,0 +1,18 @@
+[
+    {
+      "id": 1,
+      "category_name": "Bride_Expense",
+      "parent_category_id": null
+    },
+    {
+      "id": 2,
+      "category_name": "Marriage_Expense",
+      "parent_category_id": null
+    },
+    {
+      "id": 3,
+      "category_name": "Bride_Clothing_Expense",
+      "parent_category_id": 1
+    }
+]
+
